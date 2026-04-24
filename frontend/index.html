@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FitFuel Shop</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div>
+      <h1>FitFuel</h1>
+      <p class="muted" id="welcomeText">Shop</p>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-ghost" href="admin.html" id="adminBtn" style="display:none;">Admin</a>
+      <a class="btn btn-ghost" href="cart.html" id="cartBtn">
+        Cart (<span id="cartCount">0</span>)
+      </a>
+      <button class="btn btn-ghost" id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+   
+    <div class="shop-head">
+      <div>
+        <h2>Products</h2>
+        <div class="filters" id="filters">
+          <button class="fbtn active" data-cat="">All</button>
+          <button class="fbtn" data-cat="bulk">Bulk</button>
+          <button class="fbtn" data-cat="cut">Cut</button>
+          <button class="fbtn" data-cat="snack">Snack</button>
+          <button class="fbtn" data-cat="supplement">Supplement</button>
+        </div>
+      </div>
+
+      <div class="right-controls">
+        <select id="sort" class="sort">
+          <option value="">Featured</option>
+          <option value="price_asc">Price: Low → High</option>
+          <option value="price_desc">Price: High → Low</option>
+        </select>
+
+        <input id="search" class="search" type="search" placeholder="Search products..." />
+      </div>
+    </div>
+
+    <div id="productGrid" class="grid"></div>
+    <p id="emptyMsg" class="muted hidden">No products found.</p>
+
+  </main>
+
+  <script src="shop.js"></script>
+</body>
+</html>

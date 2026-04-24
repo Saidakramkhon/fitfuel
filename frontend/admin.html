@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FitFuel Admin</title>
+
+  <link rel="stylesheet" href="admin.css">
+  
+</head>
+
+<body>
+
+  
+  
+
+  <header class="topbar">
+    <div>
+      <h1>FitFuel Admin</h1>
+      <p class="muted">Manage products (Create / Update / Delete)</p>
+    </div>
+    <div class="actions">
+      <button id="refreshBtn" class="btn btn-ghost">Refresh</button>
+      <a class="btn btn-ghost" href="index.html">Go to Shop</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2 id="formTitle">Add product</h2>
+
+      <div id="msg" class="msg hidden"></div>
+
+      <form id="productForm" class="form">
+        <input type="hidden" id="productId" />
+
+        <div class="grid">
+          <label>
+            <span>Name</span>
+            <input id="name" type="text" placeholder="Chicken Rice Bowl" required />
+          </label>
+
+          <label>
+            <span>Category</span>
+            <select id="category" required>
+              <option value="">Choose…</option>
+              <option value="bulk">bulk</option>
+              <option value="cut">cut</option>
+              <option value="snack">snack</option>
+              <option value="supplement">supplement</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Price (€)</span>
+            <input id="price" type="number" step="0.01" min="0" placeholder="7.50" required />
+          </label>
+
+          <label>
+            <span>Calories</span>
+            <input id="calories" type="number" min="0" placeholder="600" required />
+          </label>
+
+          <label>
+            <span>Protein (g)</span>
+            <input id="protein" type="number" min="0" placeholder="40" required />
+          </label>
+
+          <label class="full">
+            <span>Description</span>
+            <textarea id="description" rows="3" placeholder="High protein meal..."></textarea>
+          </label>
+          <label class="full">
+            <span>Image path</span>
+            <input id="image_url" type="text" placeholder="images/chicken.jpg" />
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submitBtn">Create</button>
+          <button type="button" class="btn btn-ghost hidden" id="cancelEditBtn">Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="table-header">
+        <h2>Products</h2>
+        <input id="search" class="search" type="search" placeholder="Search products..." />
+      </div>
+
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th class="num">Price</th>
+              <th class="num">Calories</th>
+              <th class="num">Protein</th>
+              <th class="num">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr><td colspan="6" class="muted">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  
+  
+  <script src="admin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+:root{
+    --bg1:#e2e2e2;
+    --bg2:#c9d6ff;
+  
+    --card:#ffffff;
+    --muted:#666;
+    --text:#222;
+    --line:rgba(0,0,0,.08);
+    --accent:#7494ec;
+  
+    --shadow: 0 8px 18px rgba(0,0,0,.08);
+  }
+  
+  *{ box-sizing:border-box; }
+  
+  body{
+    margin:0;
+    font-family: system-ui, Arial, sans-serif;
+    background: linear-gradient(90deg, var(--bg1), var(--bg2));
+    color: var(--text);
+  }
+  
+  /* Top bar */
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 24px;
+    border-bottom:1px solid var(--line);
+    background:#fff;
+  }
+  
+  h1{ margin:0; font-size:22px; }
+  h2{ margin:0; font-size:18px; }
+  
+  .muted{
+    color: var(--muted);
+    margin: 6px 0 0;
+    font-size: 13px;
+  }
+  
+  /* Layout */
+  .container{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 16px 40px;
+  }
+  
+  .shop-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 12px;
+    margin: 10px 0 14px;
+  }
+  
+  .search{
+    width: 360px;
+    max-width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+    outline:none;
+  }
+  
+  /* ✅ 3 columns */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  /* Product card */
+  .card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: var(--shadow);
+  
+    display:flex;
+    flex-direction:column;
+  }
+  
+  /*  square image */
+  .pimg{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,.08);
+    background: #fff;
+    margin-bottom: 10px;
+  }
+  
+  .card h3{
+    margin: 0 0 6px;
+    font-size: 16px;
+  }
+  
+  /* description should not make card too tall */
+  .card .muted{
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;      /* show max 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .badge{
+    display:inline-block;
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 4px 8px;
+    border-radius: 999px;
+    margin-top: 8px;
+  }
+  
+  /* Bottom row sticks to the bottom of card */
+  .row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top: auto; /*  pushes row to bottom */
+    padding-top: 12px;
+  }
+  
+  .price{ font-weight: 800; }
+  
+  .btn{
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor:pointer;
+  }
+  
+  .btn-primary{
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  
+  .btn-primary:hover{
+    filter: brightness(0.97);
+  }
+  
+  .btn-ghost{ background: transparent; }
+  
+  .hidden{ display:none; }
+  
+  /*  Responsive */
+  @media (max-width: 900px){
+    .grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (max-width: 520px){
+    .topbar{
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  
+    .shop-head{
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .search{ width: 100%; }
+    .grid{ grid-template-columns: 1fr; }
+  }
+  .filters{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+    flex-wrap: wrap;
+  }
+  
+  .fbtn{
+    border:1px solid var(--line);
+    background:#fff;
+    color: var(--text);
+    padding:8px 10px;
+    border-radius: 999px;
+    cursor:pointer;
+    font-size: 13px;
+  }
+  
+  .fbtn.active{
+    background: var(--accent);
+    border-color: var(--accent);
+    color:#fff;
+  }
+  .right-controls{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.sort{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--text);
+  outline:none;
+  cursor:pointer;
+  min-width: 190px;
+}

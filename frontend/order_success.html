@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Success</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Order placed ✅</h1>
+      <p class="muted" id="orderText">Thanks for your purchase!</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-ghost" href="index.html">Back to Shop</a>
+      <a class="btn btn-ghost" href="cart.html">Cart</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h2>Confirmation</h2>
+      <p class="muted" id="orderIdLine">Order ID: …</p>
+      <p class="muted">Your order has been saved in the database.</p>
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("order_id");
+    document.getElementById("orderIdLine").textContent = "Order ID: " + (id || "—");
+  </script>
+</body>
+</html>

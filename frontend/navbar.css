@@ -1,0 +1,52 @@
+nav{
+    height: 3rem;
+    background: #222;
+    width: 100%;
+  }
+  
+  ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    margin: 0;
+  }
+  
+  a{
+    font-size: 12px;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .link{
+    position: relative;
+    list-style: none;
+    padding: 4px 0;
+  }
+  
+  .link::after,
+  .link::before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #cb1010;
+    transition: all 0.6s ease-in-out;
+  }
+  
+  .link::after{
+    top: 0;
+    right: 0;
+    transform-origin: right;
+  }
+  
+  .link::before{
+    left: 0;
+    bottom: 0;
+    transform-origin: left;
+  }
+  
+  .link:hover::after,
+  .link:hover::before{
+    width: 100%;
+  }

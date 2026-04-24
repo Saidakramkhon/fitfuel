@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitFuel • Login / Register</title>
+
+  <link rel="stylesheet" href="auth.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+  <div class="container" id="container">
+    
+    <div class="form-box login">
+      <form id="loginForm">
+        <h1>Login</h1>
+
+        <div id="loginMsg" class="msg hidden"></div>
+
+        <div class="input-box">
+          <input id="loginEmail" type="email" placeholder="Email" required>
+          <i class='bx bxs-envelope'></i>
+        </div>
+
+        <div class="input-box">
+          <input id="loginPassword" type="password" placeholder="Password" required>
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+
+        <p class="hint">Use your account to access the shop and admin panel (if admin).</p>
+      </form>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="form-box register">
+      <form id="registerForm">
+        <h1>Registration</h1>
+
+        <div id="registerMsg" class="msg hidden"></div>
+
+        <div class="input-box">
+          <input id="regUsername" type="text" placeholder="Username" required>
+          <i class='bx bxs-user'></i>
+        </div>
+
+        <div class="input-box">
+          <input id="regEmail" type="email" placeholder="Email" required>
+          <i class='bx bxs-envelope'></i>
+        </div>
+
+        <div class="input-box">
+          <input id="regPassword" type="password" placeholder="Password (min 6 chars)" required>
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+
+        <p class="hint">After registering, you can log in immediately.</p>
+      </form>
+    </div>
+
+    <!-- TOGGLE -->
+    <div class="toggle-box">
+      <div class="toggle-panel toggle-left">
+        <h1>Hello, Welcome!</h1>
+        <p>Don't have an account?</p>
+        <button class="btn register-btn" type="button">Register</button>
+      </div>
+
+      <div class="toggle-panel toggle-right">
+        <h1>Welcome Back!</h1>
+        <p>Already have an account?</p>
+        <button class="btn login-btn" type="button">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

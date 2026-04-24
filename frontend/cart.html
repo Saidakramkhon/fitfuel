@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FitFuel Cart</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div>
+      <h1>Your Cart</h1>
+      <p class="muted">Review items and checkout</p>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-ghost" href="index.html">Back to Shop</a>
+      <button class="btn btn-ghost" id="clearBtn">Clear cart</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="cartGrid" class="grid"></div>
+    <p id="emptyCart" class="muted hidden">Your cart is empty.</p>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="row">
+        <strong>Total:</strong>
+        <strong id="totalPrice">€0.00</strong>
+      </div>
+
+      <div class="row" style="margin-top:12px;">
+        <button class="btn btn-primary" id="checkoutBtn">Checkout</button>
+      </div>
+
+      <p class="muted" style="margin-top:10px;">
+        
+      </p>
+    </div>
+  </main>
+
+  <script src="cart.js"></script>
+</body>
+</html>
