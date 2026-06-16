@@ -5,11 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 header("Content-Type: application/json; charset=UTF-8");
 
-/**
- * Works with BOTH session styles:
- * - $_SESSION["user"] = ["id"=>..., "role"=>...]
- * - $_SESSION["user_id"] = ...
- */
+
 function current_user_id(): ?int {
   if (isset($_SESSION["user"]) && is_array($_SESSION["user"]) && isset($_SESSION["user"]["id"])) {
     return intval($_SESSION["user"]["id"]);
@@ -35,7 +31,7 @@ function require_admin(): void {
   require_login();
   $role = $_SESSION["user"]["role"] ?? null;
 
-  // If role is not stored, treat as NOT admin
+  // agar admin bolmasa
   if ($role !== "ADMIN") {
     http_response_code(403);
     echo json_encode(["error" => "Admin only"]);

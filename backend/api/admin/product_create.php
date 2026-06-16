@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 header("Content-Type: application/json; charset=UTF-8");
 
 require_once __DIR__ . "/../../config/db.php";      // gives $pdo
-require_once __DIR__ . "/../../config/auth_guard.php";   // if you use it for ADMIN check (keep)
+require_once __DIR__ . "/../../config/auth_guard.php";   // if i use it for ADMIN check (keep)
 require_admin();
 $input = json_decode(file_get_contents("php://input"), true);
 if (!is_array($input)) {

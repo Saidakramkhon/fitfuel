@@ -8,13 +8,13 @@ header("Content-Type: application/json; charset=UTF-8");
 
 require_once __DIR__ . "/../../config/db.php"; // provides $pdo
 
-// Case 1: your login already stores full user
+// 1 my login already stores full user
 if (isset($_SESSION["user"]) && is_array($_SESSION["user"])) {
   echo json_encode(["user" => $_SESSION["user"]]);
   exit;
 }
 
-// Case 2: your login stores only user_id (common)
+//  2:my login stores only user_id (common)
 $user_id = $_SESSION["user_id"] ?? ($_SESSION["id"] ?? null);
 
 if ($user_id) {
@@ -30,7 +30,7 @@ if ($user_id) {
   }
 }
 
-// Not logged in
+// 401 meqns: Not logged in
 http_response_code(401);
 echo json_encode(["error" => "Not authenticated"]);
 exit;

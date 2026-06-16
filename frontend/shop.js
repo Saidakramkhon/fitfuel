@@ -17,7 +17,7 @@ const API = {
   
   let allProducts = [];
   
-  /* ---------------- CART (localStorage) ---------------- */
+  
   const CART_KEY = "fitfuel_cart";
   
   function readCart() {
@@ -56,7 +56,7 @@ const API = {
     updateCartCount();
     alert("Added to cart ✅");
   }
-  /* ----------------------------------------------------- */
+  
   
   function escapeHtml(str) {
     return String(str ?? "")

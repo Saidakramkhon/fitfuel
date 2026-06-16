@@ -9,8 +9,8 @@ header("Content-Type: application/json; charset=UTF-8");
 
 require_once __DIR__ . "/../../config/db.php";
 
-// If you already have an auth guard, you can keep it later.
-// For now we do a simple session check so it won't crash because of missing includes.
+
+// For now i do a simple session check so it won't crash because of missing includes.
 $user_id = $_SESSION["user_id"] ?? null;
 if (!$user_id) {
   http_response_code(401);

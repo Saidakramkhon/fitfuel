@@ -26,7 +26,7 @@ if ($name === "" || $price === null || $calories === null || $protein === null |
   exit;
 }
 
-// Check product exists
+// I should check product exists
 $check = $pdo->prepare("SELECT id FROM products WHERE id = ?");
 $check->execute([$id]);
 
@@ -36,7 +36,7 @@ if (!$check->fetch()) {
   exit;
 }
 
-// Update
+// to update
 $stmt = $pdo->prepare(
     "UPDATE products
      SET name = ?, description = ?, image_url = ?, price = ?, calories = ?, protein = ?, category = ?
