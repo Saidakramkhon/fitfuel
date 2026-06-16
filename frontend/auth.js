@@ -8,10 +8,16 @@ const registerForm = document.getElementById("registerForm");
 const loginMsg = document.getElementById("loginMsg");
 const registerMsg = document.getElementById("registerMsg");
 
+const otpBox = document.getElementById("otpBox");
+const otpCode = document.getElementById("otpCode");
+const verifyOtpBtn = document.getElementById("verifyOtpBtn");
+const mainLoginBtn = document.getElementById("loginBtn");
+
 const API = {
   login: "http://localhost/fitfuel/backend/api/auth/login.php",
   register: "http://localhost/fitfuel/backend/api/auth/register.php",
   me: "http://localhost/fitfuel/backend/api/auth/me.php",
+  verifyOtp: "http://localhost/fitfuel/backend/api/auth/verify_otp.php",
 };
 
 // UI toggle
@@ -33,7 +39,7 @@ async function postJson(url, body) {
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    credentials: "include", // ✅ IMPORTANT for PHP sessions
+    credentials: "include",
     body: JSON.stringify(body),
   });
 
@@ -41,7 +47,18 @@ async function postJson(url, body) {
   return { res, data };
 }
 
-// LOGIN submit
+async function redirectByRole() {
+  const meRes = await fetch(API.me, { credentials: "include" });
+  const meData = await meRes.json().catch(() => ({}));
+
+  const role = meData?.user?.role || "USER";
+
+  setTimeout(() => {
+    window.location.href = role === "ADMIN" ? "admin.html" : "index.html";
+  }, 600);
+}
+
+// LOGIN submit: password step
 loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   clearMsg(loginMsg);
@@ -62,16 +79,48 @@ loginForm.addEventListener("submit", async (e) => {
       return;
     }
 
-    // After login, check role and redirect
-    const meRes = await fetch(API.me, { credentials: "include" });
-    const meData = await meRes.json().catch(() => ({}));
+    if (data.otp_required) {
+      otpBox.classList.remove("hidden");
+      mainLoginBtn.classList.add("hidden");
 
-    const role = meData?.user?.role || "USER";
+      let message = "Password correct. Enter OTP code.";
+      if (data.demo_otp) {
+        message += " Demo OTP: " + data.demo_otp;
+      }
+
+      showMsg(loginMsg, "ok", message);
+      return;
+    }
 
     showMsg(loginMsg, "ok", "Login successful! Redirecting...");
-    setTimeout(() => {
-      window.location.href = role === "ADMIN" ? "admin.html" : "index.html";
-    }, 600);
+    redirectByRole();
+
+  } catch (err) {
+    showMsg(loginMsg, "err", "Network/server error.");
+  }
+});
+
+// OTP submit: second step
+verifyOtpBtn.addEventListener("click", async () => {
+  clearMsg(loginMsg);
+
+  const otp = otpCode.value.trim();
+
+  if (!otp) {
+    showMsg(loginMsg, "err", "Please enter OTP code.");
+    return;
+  }
+
+  try {
+    const { res, data } = await postJson(API.verifyOtp, { otp });
+
+    if (!res.ok) {
+      showMsg(loginMsg, "err", data.error || "OTP verification failed.");
+      return;
+    }
+
+    showMsg(loginMsg, "ok", "OTP verified. Redirecting...");
+    redirectByRole();
 
   } catch (err) {
     showMsg(loginMsg, "err", "Network/server error.");
@@ -106,7 +155,6 @@ registerForm.addEventListener("submit", async (e) => {
     }
 
     showMsg(registerMsg, "ok", "Registered! Now log in.");
-    // Switch to login view after a moment
     setTimeout(() => container.classList.remove("active"), 700);
 
   } catch (err) {

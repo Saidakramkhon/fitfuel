@@ -50,27 +50,40 @@ if (!$user || !password_verify($password, $user["password_hash"])) {
   exit;
 }
 
-/* Correct login: clear failed attempts */
+/* Correct password: clear failed attempts */
 $stmt = $pdo->prepare("DELETE FROM login_attempts WHERE email = ?");
 $stmt->execute([$email]);
 
-$_SESSION["user_id"] = $user["id"];
-$_SESSION["role"] = $user["role"];
-$_SESSION["username"] = $user["username"];
+/* Generate OTP */
+$otp = strval(random_int(100000, 999999));
+$expires_at = date("Y-m-d H:i:s", time() + 5 * 60);
 
-$_SESSION["user"] = [
-  "id" => $user["id"],
-  "username" => $user["username"],
-  "role" => $user["role"]
-];
+/* Invalidate old OTPs for this user */
+$stmt = $pdo->prepare("UPDATE otp_codes SET used = 1 WHERE user_id = ?");
+$stmt->execute([$user["id"]]);
 
-write_security_log($pdo, $user["id"], $email, "LOGIN_SUCCESS");
+/* Save new OTP */
+$stmt = $pdo->prepare(
+  "INSERT INTO otp_codes (user_id, otp_code, expires_at)
+   VALUES (?, ?, ?)"
+);
+$stmt->execute([$user["id"], $otp, $expires_at]);
 
+/* Temporary session only, not fully logged in yet */
+$_SESSION["pending_user_id"] = $user["id"];
+$_SESSION["pending_username"] = $user["username"];
+$_SESSION["pending_role"] = $user["role"];
+$_SESSION["pending_email"] = $email;
+
+write_security_log($pdo, $user["id"], $email, "OTP_SENT");
+
+/*
+For demo we return OTP in JSON.
+Later we can send it by real email.
+*/
 echo json_encode([
-  "message" => "login successful",
-  "user" => [
-    "id" => $user["id"],
-    "username" => $user["username"],
-    "role" => $user["role"]
-  ]
+  "message" => "password correct, OTP required",
+  "otp_required" => true,
+  "demo_otp" => $otp,
+  "note" => "For demo, OTP is shown here. In real system it is sent by email."
 ]);
