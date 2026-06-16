@@ -2,6 +2,7 @@
 require_once __DIR__ . "/../../config/cors.php";
 require_once __DIR__ . "/../../config/db.php";
 require_once __DIR__ . "/../../config/security_log.php";
+require_once __DIR__ . "/../../config/mail.php";
 
 session_start();
 
@@ -75,15 +76,17 @@ $_SESSION["pending_username"] = $user["username"];
 $_SESSION["pending_role"] = $user["role"];
 $_SESSION["pending_email"] = $email;
 
+$emailSent = send_otp_email($email, $otp);
+
+if (!$emailSent) {
+  http_response_code(500);
+  echo json_encode(["error" => "OTP generated but email could not be sent"]);
+  exit;
+}
+
 write_security_log($pdo, $user["id"], $email, "OTP_SENT");
 
-/*
-For demo we return OTP in JSON.
-Later we can send it by real email.
-*/
 echo json_encode([
-  "message" => "password correct, OTP required",
-  "otp_required" => true,
-  "demo_otp" => $otp,
-  "note" => "For demo, OTP is shown here. In real system it is sent by email."
+  "message" => "password correct, OTP sent to email",
+  "otp_required" => true
 ]);
