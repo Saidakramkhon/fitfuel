@@ -1,2 +1,3 @@
 .DS_Store
 backend/config/db.php
+backend/config/mail_secret.php
