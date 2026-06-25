@@ -37,3 +37,36 @@ function send_otp_email($toEmail, $otpCode) {
         return false;
     }
 }
+function send_password_reset_email($toEmail, $resetToken) {
+    $secret = require __DIR__ . "/mail_secret.php";
+
+    $mail = new PHPMailer(true);
+
+    try {
+        $mail->isSMTP();
+        $mail->Host = "smtp.gmail.com";
+        $mail->SMTPAuth = true;
+        $mail->Username = $secret["smtp_username"];
+        $mail->Password = $secret["smtp_password"];
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        $mail->setFrom("fitfuel.security@gmail.com", "FitFuel Security");
+        $mail->addAddress($toEmail);
+
+        $mail->isHTML(true);
+        $mail->Subject = "FitFuel Password Reset";
+        $mail->Body = "
+            <h2>FitFuel Password Reset</h2>
+            <p>Your password reset token is:</p>
+            <h3>$resetToken</h3>
+            <p>This token expires in 15 minutes.</p>
+        ";
+
+        $mail->send();
+        return true;
+
+    } catch (Exception $e) {
+        return false;
+    }
+}

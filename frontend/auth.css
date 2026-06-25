@@ -263,3 +263,91 @@ form {
     font-size: 30px;
   }
 }
+.forgot-link {
+  margin: -12px 0 14px;
+  text-align: right;
+}
+
+.forgot-link a {
+  font-size: 13px;
+  color: #7494ec;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.forgot-link a:hover {
+  text-decoration: underline;
+}
+
+#forgotBox {
+  margin-top: 10px;
+}
+
+#forgotBox .btn {
+  margin-bottom: 10px;
+}
+#forgotBox.hidden {
+
+  display: none;
+
+}
+
+#forgotBox {
+
+  margin-top: 10px;
+
+}
+
+#forgotBox .input-box {
+
+  margin: 18px 0;
+
+}
+
+#forgotBox .btn {
+
+  margin-top: 8px;
+
+}
+
+.login-reset-mode #loginEmail,
+
+.login-reset-mode #loginPassword,
+
+.login-reset-mode #loginBtn,
+
+.login-reset-mode #otpBox,
+
+.login-reset-mode .hint {
+
+  display: none;
+
+}
+
+.login-reset-mode .forgot-link {
+
+  text-align: center;
+
+  margin: 10px 0 15px;
+
+}
+
+#backToLoginBtn {
+
+  margin-top: 10px;
+
+  background: transparent;
+
+  color: #7494ec;
+
+  box-shadow: none;
+
+}
+.register .input-box {
+  width: 100%;
+  margin: 12px 0;
+}
+
+.register .input-box input {
+  width: 100%;
+}

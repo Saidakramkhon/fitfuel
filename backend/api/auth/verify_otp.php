@@ -50,29 +50,14 @@ if (!$row) {
 $stmt = $pdo->prepare("UPDATE otp_codes SET used = 1 WHERE id = ?");
 $stmt->execute([$row["id"]]);
 
-$_SESSION["user_id"] = $user_id;
-$_SESSION["role"] = $role;
-$_SESSION["username"] = $username;
-
-$_SESSION["user"] = [
-  "id" => $user_id,
-  "username" => $username,
-  "role" => $role
-];
-
-unset($_SESSION["pending_user_id"]);
-unset($_SESSION["pending_username"]);
-unset($_SESSION["pending_role"]);
-unset($_SESSION["pending_email"]);
+$_SESSION["phrase_pending_user_id"] = $user_id;
+$_SESSION["phrase_pending_username"] = $username;
+$_SESSION["phrase_pending_role"] = $role;
+$_SESSION["phrase_pending_email"] = $email;
 
 write_security_log($pdo, $user_id, $email, "OTP_VERIFIED");
-write_security_log($pdo, $user_id, $email, "LOGIN_SUCCESS");
 
 echo json_encode([
-  "message" => "OTP verified, login successful",
-  "user" => [
-    "id" => $user_id,
-    "username" => $username,
-    "role" => $role
-  ]
+  "message" => "OTP verified, security phrase required",
+  "security_phrase_required" => true
 ]);

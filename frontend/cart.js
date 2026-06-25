@@ -47,15 +47,18 @@ function renderCart() {
       <h3>${item.name}</h3>
 
       <div class="row">
-        <span class="price">${money(item.price)}</span>
-        <span class="badge">Qty: <strong>${item.qty}</strong></span>
-      </div>
+  <span class="price">${money(item.price)}</span>
+</div>
 
-      <div class="row" style="margin-top:12px;">
-        <button class="btn btn-ghost" data-dec="${idx}">-</button>
-        <button class="btn btn-ghost" data-inc="${idx}">+</button>
-        <button class="btn btn-ghost" data-remove="${idx}">Remove</button>
-      </div>
+<div class="cart-actions">
+  <div class="qty-control">
+    <button class="btn btn-ghost" data-dec="${idx}">-</button>
+    <span class="qty-badge">Qty: ${item.qty}</span>
+    <button class="btn btn-ghost" data-inc="${idx}">+</button>
+  </div>
+
+  <button class="btn btn-ghost" data-remove="${idx}">Remove</button>
+</div>
     `;
 
     grid.appendChild(card);
